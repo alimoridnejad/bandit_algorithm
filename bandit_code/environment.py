@@ -4,7 +4,7 @@ import numpy as np
 
 class BernoulliEnv(object):
 
-    def __init__(self, N_arm):
+    def __init__(self, N_arm: int=10):
         self.N_arm = N_arm
         # Draw true parameters
         # Here parameter is true probability of success for each arm and also the expected reward in each sampling
@@ -19,3 +19,6 @@ class BernoulliEnv(object):
         """
         sample = np.random.binomial(n=1, p=self.True_probs[arm])
         return sample
+
+
+bernoulli_env = BernoulliEnv()
