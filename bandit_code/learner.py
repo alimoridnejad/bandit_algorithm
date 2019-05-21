@@ -28,7 +28,7 @@ class EpsilonGreedy(Learner):
         # The probability to explore at each time step
         self.eps = eps
         # Initial estimates
-        self.estimates = np.random.normal(0, 1, self.bernoulli_env.N_arm)
+        self.estimates = np.random.uniform(0, 1, self.bernoulli_env.N_arm)
         self.total_reward = 0
 
     def arm_selection(self):
@@ -37,7 +37,7 @@ class EpsilonGreedy(Learner):
             # Do a random exploration
             i = np.random.choice(self.bernoulli_env.N_arm)
         else:
-            # Pick the best one
+            # Pick the best estimate
             i = np.argmax(self.estimates)
         self.counts[i] += 1
         return i
