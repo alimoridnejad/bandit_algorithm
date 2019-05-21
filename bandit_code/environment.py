@@ -9,7 +9,9 @@ class BernoulliEnv(object):
         # Draw true parameters
         # Here parameter is true probability of success for each arm and also the expected reward in each sampling
         # from the Bernoulli distribution.
-        self.True_probs = np.random.normal(0, 1, N_arm)
+        self.True_probs = [0.1, 0.2, 0.3, 0.4, 0.9]
+        # self.True_probs = np.random.uniform(0, 1, N_arm)
+        self.best_reward = max(self.True_probs)
 
     def generate_reward(self, arm):
         """
@@ -19,6 +21,9 @@ class BernoulliEnv(object):
         """
         sample = np.random.binomial(n=1, p=self.True_probs[arm])
         return sample
+
+    def get_best_reward(self):
+        return self.best_reward
 
 
 bernoulli_env = BernoulliEnv()
