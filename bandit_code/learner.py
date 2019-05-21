@@ -5,7 +5,7 @@ import numpy as np
 from bandit_code.environment import bernoulli_env
 
 
-class Solver(object):
+class Learner(object):
     def __init__(self, bernoulli_env: bernoulli_env):
         """The target Environment (env) to solve."""
 
@@ -21,7 +21,7 @@ class Solver(object):
         return self.total_reward
 
 
-class EpsilonGreedy(Solver):
+class EpsilonGreedy(Learner):
     def __init__(self, bernoulli_env, eps):
         # Running env from the parent class
         super().__init__(bernoulli_env)

@@ -1,4 +1,4 @@
-from bandit_code.solver import EpsilonGreedy
+from bandit_code.learner import EpsilonGreedy
 from bandit_code.environment import BernoulliEnv
 
 
