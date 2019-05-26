@@ -2,7 +2,7 @@ from __future__ import division
 
 import numpy as np
 
-from environment import bernoulli_env
+from bandit_code.environment import bernoulli_env
 
 
 class Learner(object):
