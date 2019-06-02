@@ -46,7 +46,7 @@ class BernoulliReward:
 
 
 class RunExperiment:
-    def __init__(self, epsilon: int, n_arms: int, n_simulation: int, horizon:int,
+    def __init__(self, epsilon: float, n_arms: int, n_simulation: int, horizon:int,
                  list_true_probabilities: List [float],
                  initial_rewards:List[float]=None):
         self.epsilon = epsilon
