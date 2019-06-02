@@ -3,7 +3,7 @@ import random
 import numpy as np
 
 
-class EpsilonGreedy(object):
+class EpsilonGreedy:
     def __init__(self, epsilon: float = 0.1, counts: int = None, values: float = None):
         self.epsilon = epsilon
         self.counts = counts
@@ -35,4 +35,13 @@ class EpsilonGreedy(object):
         arm_value = self.values[picked_arm]
         self.values[picked_arm] = arm_value * ((arm_count- 1)/arm_count) + reward/arm_count
 
-        
+
+class BernoulliReward():
+    def __init__(self, true_probability: float) -> int:
+        self.true_probability = true_probability
+
+    def reward(self):
+        reward = np.random.binomial(n=1, p=self.true_probability)
+        return reward
+
+
