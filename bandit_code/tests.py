@@ -22,6 +22,6 @@ def test_bernoulli_reward():
 
     bernoulli_reward = BernoulliReward(true_probability=0.6)
 
-    reward = bernoulli_reward.reward()
+    reward = bernoulli_reward.get_reward()
 
     assert reward == 0 or reward == 1
