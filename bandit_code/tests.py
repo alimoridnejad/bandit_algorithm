@@ -1,4 +1,5 @@
-from bandit_code.simple_epsilon_gready import EpsilonGreedy
+from bandit_code.simple_epsilon_gready import EpsilonGreedy, BernoulliReward
+
 
 def check_value_in_range(value):
     if 0 <= value < 10:
@@ -15,3 +16,12 @@ def test_epsilon_gready_picked_arm():
     picked_arm = epsilon_gready.pick_arm()
 
     assert check_value_in_range(picked_arm) == True
+
+
+def test_bernoulli_reward():
+
+    bernoulli_reward = BernoulliReward(true_probability=0.6)
+
+    reward = bernoulli_reward.reward()
+
+    assert reward == 0 or reward == 1
