@@ -25,7 +25,7 @@ class EpsilonGreedy:
 
         return picked_arm
 
-    def update(self, values, picked_arm, reward):
+    def update(self, picked_arm, reward):
 
         # update count for picked arm
         self.counts[picked_arm] += 1
@@ -40,7 +40,7 @@ class BernoulliReward():
     def __init__(self, true_probability: float) -> int:
         self.true_probability = true_probability
 
-    def reward(self):
+    def get_reward(self):
         reward = np.random.binomial(n=1, p=self.true_probability)
         return reward
 
