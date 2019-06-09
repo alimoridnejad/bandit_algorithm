@@ -10,6 +10,6 @@ if __name__ == '__main__':
                                list_true_probabilities=[.3, .6, .1, .2, .7],
                                initial_rewards=[0.0, 0.0, 0.0, 0.0, 0.0])
 
-    picked_arm, average_rewards, cumulative_rewards = experiment
+    picked_arm, average_rewards, cumulative_rewards = experiment.loop_over_all_simulation()
 
     a = 1
