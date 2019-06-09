@@ -84,5 +84,5 @@ class RunExperiment:
         average_rewards = np.mean(arm_rewards_array, axis=0)
         cumulative_rewards = np.cumsum(average_rewards)
 
-        return picked_arm, average_rewards, cumulative_rewards
+        return picked_arms_array, average_rewards, cumulative_rewards
 
