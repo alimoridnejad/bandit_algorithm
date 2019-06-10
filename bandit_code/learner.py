@@ -2,7 +2,7 @@ from __future__ import division
 
 import numpy as np
 
-from bandit_code.environment import bernoulli_env
+from environment import bernoulli_env
 
 
 class Learner(object):
@@ -39,6 +39,36 @@ class Learner(object):
         return self.total_reward
 
 
+class WinStayLoseShift(Learner):
+    def __init__(self, bernoulli_env):
+        # Running env from the parent class
+        super().__init__(bernoulli_env)
+        self.prev_arm = np.random.choice(self.bernoulli_env.N_arm)
+        self.prev_rew = 1
+
+    def arm_selection(self):
+        if self.prev_rew == 0:
+            # Do a random exploration
+            i = np.random.choice(self.bernoulli_env.N_arm)
+        else:
+            # Pick the same arm as before
+            i = self.prev_arm
+        self.counts[i] += 1
+        return i
+
+    def run_one_step(self):
+        arm = self.arm_selection()
+        reward = self.reward_observation(arm)
+        self.cumulative_reward(reward)
+        self.prev_arm = arm
+        self.prev_rew = reward
+
+    def run(self, num_steps):
+        for _ in range(num_steps):
+            self.run_one_step()
+        return self.total_reward
+
+
 class EpsilonGreedy(Learner):
     def __init__(self, bernoulli_env, eps):
         # Running env from the parent class
@@ -59,6 +89,7 @@ class EpsilonGreedy(Learner):
 
     def estimate_update(self, arm, reward):
         self.estimates[arm] += 1. / (self.counts[arm] + 1) * (reward - self.estimates[arm])
+
 
 class DecayingEpsilonGreedy(Learner):
     def __init__(self, bernoulli_env, eps, beta):
