@@ -64,7 +64,7 @@ class RunExperiment:
         picked_arms_array = np.zeros((self.n_simulation, self.horizon))
         arm_rewards_array = np.zeros((self.n_simulation, self.horizon))
 
-        bernoulli_reward_list = list(map(lambda mu: BernoulliReward(true_probability=mu), self.list_true_probabilities))
+        bernoulli_reward_list = list(map(lambda true_probability: BernoulliReward(true_probability=true_probability), self.list_true_probabilities))
 
         epsilon_gready = EpsilonGreedy()
 
@@ -84,5 +84,8 @@ class RunExperiment:
         average_rewards = np.mean(arm_rewards_array, axis=0)
         cumulative_rewards = np.cumsum(average_rewards)
 
-        return picked_arms_array, average_rewards, cumulative_rewards
+        average_regrets = max(self.list_true_probabilities) - average_rewards
+        cumulative_regrets = np.cumsum(average_regrets)
+
+        return picked_arms_array, cumulative_regrets
 

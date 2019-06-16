@@ -11,16 +11,15 @@ if __name__ == '__main__':
                                list_true_probabilities=[.3, .6, .1, .2, .7],
                                initial_rewards=[0.0, 0.0, 0.0, 0.0, 0.0])
     experiment.initialize_rewards()
-    picked_arm, average_rewards, cumulative_rewards = experiment.loop_over_all_simulation()
+    picked_arm, cumulative_regrets = experiment.loop_over_all_simulation()
 
     fig, ax = plt.subplots(figsize=(12,8))
-    horizon = list(range(len(average_rewards)))
-    ax.plot(horizon, average_rewards.tolist())
-    ax.set_ylim(0, 1)
+    horizon = list(range(len(cumulative_regrets)))
+    ax.plot(horizon, cumulative_regrets)
     ax.set_xlabel("Time")
     ax.set_ylabel("Rewards")
-    ax.set_title("Multi-arm bandit reward over time horizon")
-    file_name = "Multi-arm_bandit_reward_plot.png"
+    ax.set_title("Multi-arm bandit regret over time horizon")
+    file_name = "Multi-arm_bandit_regret_plot.png"
     directory = "/Users/niloufar/Desktop/bandit_algorithm/bandit_code/"
     output_file_path = os.path.join(directory, file_name)
 
